@@ -1,15 +1,19 @@
 "use client";
 
-import { useGlobalLoading } from "@/hooks/use-global-loading";
+import { PUBLIC_ROUTES } from "@/constants/routes";
+import { useUserStore } from "@/stores/user-store";
 import { Loader2 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import React, { PropsWithChildren } from "react";
 
 type Props = PropsWithChildren<{}>;
 
 const LoadingProvider = ({ children }: Props) => {
-  const { isGlobalLoading } = useGlobalLoading();
+  const { isUserLoading } = useUserStore();
+  const pathname = usePathname();
 
-  if (!isGlobalLoading) return <>{children}</>;
+  if (!isUserLoading || PUBLIC_ROUTES.includes(pathname))
+    return <>{children}</>;
 
   return (
     <div className="flex flex-col w-full h-full items-center justify-center gap-4">
