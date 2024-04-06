@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import AuthHoc from "@/hoc/auth";
+import AuthProvider from "@/providers/auth";
+import LoadingProvider from "@/providers/loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "dark")}>
-        <AuthHoc>{children}</AuthHoc>
+      <body className={cn(inter.className, "dark w-screen h-screen")}>
+        <AuthProvider>
+          <LoadingProvider>{children}</LoadingProvider>
+        </AuthProvider>
       </body>
     </html>
   );
