@@ -20,8 +20,8 @@ const AuthProvider = ({ children }: Props) => {
           router.replace("/app");
         }
 
-        // slight delay to avoid flickering
         setIsUserLoading(true);
+        // slight delay to avoid flickering
         setTimeout(() => {
           setIsPageVisible(true);
         }, 250);
