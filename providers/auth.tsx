@@ -1,23 +1,35 @@
 "use client";
 
-import { useGlobalLoading } from "@/hooks/use-global-loading";
 import { auth } from "@/lib/firebase";
+import { useUserStore } from "@/stores/user-store";
+import { usePathname, useRouter } from "next/navigation";
 import React, { PropsWithChildren, useEffect, useState } from "react";
 
 type Props = PropsWithChildren<{}>;
 
 const AuthProvider = ({ children }: Props) => {
   const [isPageVisible, setIsPageVisible] = useState(false);
-  const { setIsGlobalLoading } = useGlobalLoading();
+  const { setIsUserLoading, setUser } = useUserStore();
+  const pathname = usePathname();
+  const router = useRouter();
+
   useEffect(() => {
     const authListener = auth.onAuthStateChanged((user) => {
       if (user) {
-        // mock fetch user data
-        setIsPageVisible(true);
-        setIsGlobalLoading(true);
+        if (pathname === "/") {
+          router.replace("/app");
+        }
+
+        // slight delay to avoid flickering
+        setIsUserLoading(true);
         setTimeout(() => {
-          setIsGlobalLoading(false);
-        }, 2000);
+          setIsPageVisible(true);
+        }, 250);
+        setUser(user);
+        // mock fetch user data
+        setTimeout(() => {
+          setIsUserLoading(false);
+        }, 1000);
       } else {
         setIsPageVisible(true);
       }

@@ -8,6 +8,7 @@ const config = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
     "./providers/**/*.{ts,tsx}",
+    "./views/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {

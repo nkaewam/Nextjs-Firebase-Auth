@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import AuthProvider from "@/providers/auth";
 import LoadingProvider from "@/providers/loading";
+import Header from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(inter.className, "dark w-screen h-screen")}>
         <AuthProvider>
-          <LoadingProvider>{children}</LoadingProvider>
+          <LoadingProvider>
+            <Header />
+            {children}
+          </LoadingProvider>
         </AuthProvider>
       </body>
     </html>

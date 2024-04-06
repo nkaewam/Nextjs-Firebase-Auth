@@ -34,10 +34,10 @@ export const signIn = async (param: SignIn) => {
   }
 };
 
-// export const signOut = async () => {
-//   await auth.signOut();
-//   window.location.replace(ROUTES.HOME);
-// };
+export const signOut = async () => {
+  await auth.signOut();
+  window.location.replace("/");
+};
 
 // export const createUser = async (email: string, password: string) => {
 //   try {
